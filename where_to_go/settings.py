@@ -19,6 +19,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "afisha",
     "places",
+    "adminsortable2",
 ]
 
 MIDDLEWARE = [
