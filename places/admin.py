@@ -1,4 +1,7 @@
+import traceback
+
 from django.contrib import admin
+from django.utils.html import format_html
 
 from .models import Place, Image
 
@@ -6,6 +9,21 @@ from .models import Place, Image
 class ImageInline(admin.TabularInline):
     model = Image
     extra = 1
+    fields = ['preview', 'image', 'position']
+    readonly_fields = ['preview']
+
+    def preview(self, obj):
+        try:
+            if not obj.image:
+                return '-'
+            return format_html(
+                '<img src="{}" style="max-height: 200px; width: auto;">',
+                obj.image.url,
+            )
+        except Exception:
+            traceback.print_exc()
+            return '-'
+    preview.short_description = 'Превью'
 
 
 @admin.register(Place)
