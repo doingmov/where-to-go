@@ -92,6 +92,11 @@ USE_TZ = True
 
 STATIC_URL = "static/"
 
+STATIC_ROOT = env.path(
+    "DJANGO_STATIC_ROOT",
+    default=BASE_DIR / "staticfiles"
+)
+
 MEDIA_URL = '/media/'
 
 MEDIA_ROOT = BASE_DIR / 'media'
